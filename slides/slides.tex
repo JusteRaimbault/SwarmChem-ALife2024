@@ -1,0 +1,267 @@
+\documentclass[english,11pt]{beamer}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Proba}{\mathbb{P}}
+
+\newcommand{\Covb}[2]{\ensuremath{\Cov\!\left[#1,#2\right]}}
+\newcommand{\Eb}[1]{\ensuremath{\E\!\left[#1\right]}}
+\newcommand{\Pb}[1]{\ensuremath{\Proba\!\left[#1\right]}}
+\newcommand{\Varb}[1]{\ensuremath{\Var\!\left[#1\right]}}
+
+% norm
+\newcommand{\norm}[1]{\| #1 \|}
+
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+
+
+
+
+\usepackage{mathptmx,amsmath,amssymb,graphicx,bibentry,bbm,babel,ragged2e}
+
+\makeatletter
+
+\newcommand{\noun}[1]{\textsc{#1}}
+\newcommand{\jitem}[1]{\item \begin{justify} #1 \end{justify} \vfill{}}
+\newcommand{\sframe}[2]{\frame{\frametitle{#1} #2}}
+
+\newenvironment{centercolumns}{\begin{columns}[c]}{\end{columns}}
+%\newenvironment{jitem}{\begin{justify}\begin{itemize}}{\end{itemize}\end{justify}}
+
+\usetheme{Warsaw}
+\setbeamertemplate{footline}[text line]{}
+\setbeamercolor{structure}{fg=purple!50!blue, bg=purple!50!blue}
+
+\setbeamersize{text margin left=15pt,text margin right=15pt}
+
+\setbeamercovered{transparent}
+
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{multirow}
+
+
+\makeatother
+
+\begin{document}
+
+
+
+
+
+\title{Spatial sensitivity of the evolutionary swarm chemistry model}
+
+\author{J.~Raimbault$^{1,2,3,4,\ast}$\\
+\texttt{$\ast$ juste.raimbault@ign.fr}
+}
+
+
+\institute{$^{1}$ LASTIG, IGN-ENSG\\
+$^{2}$CASA, UCL\\
+$^{3}$UPS CNRS 3611 ISC-PIF\\
+$^{4}$UMR CNRS 8504 G{\'e}ographie-cit{\'e}s
+}
+
+
+\date{ALife 2024\\\smallskip
+Parallel session 2: Artificial Chemistry\\\smallskip
+July 22th 2024
+}
+
+\frame{\maketitle}
+
+
+% Artificial life simulation models are most of the time spatially explicit, yet there are not much dedicated studies of how spatial structure and spatial initial conditions influence model outcomes. We propose in this contribution to study the role of spatial structure in the classical model of swarm chemistry. We couple the evolutionary swarm chemistry model with spatial structure generators, and quantify the impact of space on diversity outcomes by using a diversity search algorithm. We find a significant influence of the type of spatial structure on model outcomes.
+
+
+
+\sframe{Evolution and space}{
+
+% The role of spatial structure and dynamics in evolution has been highlighted \citep{lion2008self}, but remains an auxiliary focus in the literature as most models do not consider space or in very simplified settings. An evolutionary niche is not principally defined by its spatial extent, but indeed corresponds to some geographical territories, and it has furthermore been shown that spatial effects may favour niche construction \citep{silver2006spatial}. From the viewpoint of \cite{holland2012signals}'s theory for complex adaptive systems, boundaries are at the core of the niche concept and thus the spatial structure of complex systems defines their dynamics. Also, biogeography optimisation algorithms have a good performance precisely because evolution is embedded in space \citep{simon2008biogeography}. Therefore, a better understanding of the role of space is an important theoretical component for the discipline of Artificial Life.
+
+\justify
+
+	$\rightarrow$ 
+	
+	\bigskip
+	
+	$\rightarrow$ 
+
+
+
+}
+
+
+\sframe{Spatial sensitivity of social simulation models}{
+
+% Regarding Artificial Societies, and more particularly socio-spatial simulation models, a recent stream of work investigated this aspect. \cite{raimbault2019space} showed that spatial initial conditions could have as much impact on model outcomes than the parameters of the model itself. \cite{raimbault2023spatial} detailed how diverse spatial configuration generators can be coupled with simulation models to quantify such effects. The term of Spatial Sensitivity Analysis was coined in that context, and a specific \texttt{scala} library was developed to implement these methods \citep{raimbault2020scala}. A question remaining open is to what extent such effects are specific to social systems, or do they hold in other disciplines. Furthermore in terms of broader methodological aspects, sensitivity analysis of ALife models is not widely applied despite a few examples such as \citep{alden2014easing}.
+
+% TODO mention work by Seth Bullock presented this morning
+
+
+
+
+
+}
+
+
+
+\sframe{Research objective}{
+
+
+% This contribution reports on preliminary results aimed at investigating the spatial sensitivity in ALife simulation models. More particularly, we focus on an iconic model of ALife which is the Swarm Chemistry model \citep{sayama2009swarm}. It is a well studied model of self-organisation, and it was shown by \citep{sayama2018seeking} that introducing evolutionary dynamics between particles could generate swarm patterns in an open-ended way. While \citep{sayama2018seeking} uses space to introduce evolutionary pressure through perturbations and shows that evolution outcomes are strongly influenced by the magnitude of the perturbation, it remains a simple splitting of the world in half. We couple the evolutionary version of the model with more elaborate spatial structure generators for the spatial distribution of competition rules, and investigate the role of the spatial structure on diversity outcomes.
+
+\justify
+
+	$\rightarrow$ 
+          
+         \bigskip      
+                
+	$\rightarrow$ 
+	
+	  \bigskip 
+	   \bigskip 
+
+\textbf{Contribution: }
+
+
+}
+
+
+
+\sframe{Evolutionary swarm chemistry settings}{
+
+% We use the evolutionary version of Swarm Chemistry described by \citep{sayama2018seeking}. The base of the model are particles which self-organise based on local interaction rules (on speed and rotation e.g.) ruled by particle-level parameters. Some mutation in parameter values and transmission between particles at collision allows some evolutionary dynamics to be introduced. As no global fitness landscape rules this evolution, different rules can be used for this ``selection'' step at transmission: faster particle transmits its genome, slower transmits, the majority within a local neighbourhood is taken, etc. These rules can be changed in space and time to foster evolutionary dynamics as shown by \citep{sayama2018seeking}.
+
+}
+
+
+\sframe{Spatial generators}{
+
+
+% We introduce a spatial context in which swarm dynamics and evolution will take place. Given a grid decomposition of the two dimensional space (in practice with a lower resolution than coordinates), each cell of the grid will contain the transmission rule for collisions occurring in this cell. We consider the rules ``Faster'', ``Slower'', ``Behind'', ``Majority'' and ``Majority Relative'' only (see \citep{sayama2018seeking} for details), and organise the spatial distribution of rules with some structure. We use the following spatial contexts: (i) a totally random attribution of cell rule, to act as a null model (``random''); (ii) a uniform rule chosen randomly among all rules - which should also be a null model in some sense (``uniform''); (iii) four rectangular quadrants, with the space being split at a random x coordinate and at a random y coordinate, and with a uniform random rule within each quadrant - this configuration corresponds to neighbour regions with different evolution dynamics and exchanging particles, in a similar way to biogeography algorithms (``split''); (iv) a more realistic hierarchical organisation, inspired by the spatial organisation of systems of cities \citep{batty2008size}: a certain number of ``urban centres'' ($C=10$ in practice) with a scaling law distribution of sizes (Zipf's law, with a scaling exponent $\alpha_C = 1$ \citep{pumain2006evolutionary}) are randomly distributed in space, an exponential kernel with a radius proportional to the size is applied for each centre (monocentric cities \citep{lemoy2020evidence}), the distribution is rescaled as a probability distribution, a threshold ($\theta_C = 0.5$ in practice) is applied to discriminate between inside and outside of centres, and finally a randomly chosen rule is applied inside and an other random rule outside (``zipf''). Although inspired by urban science and patterns in social systems, we believe this last generator could also capture existing natural structures with similar hierarchical distributions, and have some genericity since hierarchy is recurrent in natural and social complex systems \citep{pumain2006hierarchy}.
+
+
+%figures/space-random-seed3862926447439152786.png%figures/space-split-seed916472849520508769.png%figures/space-uniform-seed-3159126300547140394.png%figures/space-zipf-seed7475060086555642944.png
+
+}
+
+
+
+\sframe{Diversity search}{
+
+
+\textit{Application of the \textbf{PSE diversity search algorithm} \cite{cherel2015beyond} to obtain the feasible space.}
+
+
+}
+
+
+\sframe{Model implementation}{
+
+% We use the implementation of spatial structure generators provided by \citep{raimbault2020scala}. For an easier integration with this scala library, the Swarm Chemistry model was reimplemented in scala, based on the open source Java code provided by \citep{sayama2018seeking}. Our implementation is embedded into the OpenMOLE software for exploration and validation of simulation models \citep{reuillon2013openmole}, which includes the PSE diversity search algorithm. Source code and results are available on an open git repository at \url{https://github.com/JusteRaimbault/SwarmChemistrySpatialSensitivity}.
+
+Model implemented in scala: \url{https://github.com/JusteRaimbault/SwarmChemistrySpatialSensitivity}
+
+\bigskip
+
+Integrated into the OpenMOLE platform for \textbf{model exploration and validation}	\cite{reuillon2013openmole}
+
+\medskip
+
+\begin{center}
+\includegraphics[width=0.15\textwidth]{figures/iconOM.png}\includegraphics[width=0.55\textwidth]{figures/openmole.png}
+\end{center}
+
+
+}
+
+
+
+
+\sframe{Indicators and parametrisation}{
+
+% We focus on the diversity of particles as an outcome of coupling the spatial generators with swarm dynamics, as it is a key aspect for evolution and open-ended systems. We consider average and standard deviation of three particle parameters, namely $c_1, c_2, c_3$ which capture the main essence of each particle behaviour. This gives a 6-dimensional output, for which we seek to maximise diversity using the Pattern Search Exploration algorithm developed by \citep{cherel2015beyond}.
+
+%Swarm parameters are fixed at their default values used in \citep{sayama2018seeking}, except for swarm size taken smaller for performance reasons ($N=200$), and final time $t_f = 10000$. The swarm is initialised with 20 random individuals and 180 inactive particles. The free parameters for the diversity search algorithm, run for 2100 generations, are the seed of the random number generator, and the type of spatial generator used among the four described above.
+
+
+
+}
+
+\sframe{Results: feasible spaces}{
+
+% Scatterplot of PSE objectives, with points coloured by type of generator. Running t-tests between group averages for each indicator yields p-values smaller than 0.1 for $\sigma(c_1)$ (between uniform and zipf) and for $\bar{c_2}$ (zipf-random, zipf-uniform, uniform-split).
+%We show in Fig.~\ref{fig:pse} scatterplots of the final point cloud obtained with the PSE algorithm. The overall shape of each plot is not trivial, with reduced standard deviations for averages values of averages for each parameters. Correlation patterns are also diverse. When comparing across generators (point colour), statistical distribution are significantly changing for some dimensions, for example $\sigma(c_1)$ (which shows a unique bimodal distribution for zipf only) and $\bar{c_2}$, what is confirmed by t-test values (see legend of Fig.~\ref{fig:pse}). When looking at the stronger and most significant correlations, between $\bar{c_1}$ and $\bar{c_3}$, only uniform space is not significant and close to zero, while other are high.
+%We also compare hypervolumes
+%Simple linear models to link the type of generator with outputs
+%Altogether, these results confirm a significant effect of the spatial context on evolution outcomes in this model.
+
+
+
+}
+
+
+\sframe{Results: statistical analysis}{
+
+}
+
+
+\sframe{Discussion}{
+
+% We show the important influence of space in a typical Artificial Life model with these preliminary results. Note that this work was not aimed at informing real-world evolutionary processes, but rather to open a methodological research direction on spatial sensitivity analysis of ALife models. Future work will have to focus on better understanding how qualitatively each structure influences evolution, and trying to observe recurrent evolutionary patterns such as potentially the emergence of a particle biogeography. Other types and more realistic generators for this particular system, but also the application to other disciplines such as ecology and possibly more realistic evolutionary processes, are also important future research directions.
+
+
+\justify
+
+\textbf{Main results: }
+			
+\bigskip
+				
+\textbf{Next steps: }
+
+
+\bigskip
+
+\textbf{Conclusion: } 
+
+
+}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\bibliographystyle{apalike}
+\bibliography{../biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
