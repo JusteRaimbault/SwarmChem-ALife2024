@@ -89,12 +89,25 @@ July 22th 2024
 
 \justify
 
-	$\rightarrow$ 
+	$\rightarrow$ role of spatial structure and dynamics in evolution \cite{lion2008self}
 	
 	\bigskip
 	
-	$\rightarrow$ 
+	$\rightarrow$ niche construction linked to spatial effects  \cite{silver2006spatial}
+	
+	\bigskip
+	
+	$\rightarrow$ \cite{holland2012signals}'s theory for complex adaptive systems links spatial boundaries with niches
+	
+	\bigskip
+	
+	$\rightarrow$ biogeography optimisation algorithms rely on island geography 
+	
+	\cite{simon2008biogeography}
 
+	%\bigskip
+	%\bigskip
+	%\textit{But space remains a secondary focus in the study of evolution}
 
 
 }
@@ -107,6 +120,11 @@ July 22th 2024
 % TODO mention work by Seth Bullock presented this morning
 
 
+\includegraphics[width=\linewidth]{figures/spatial_SA.png}
+
+\nocite{raimbault2019second}
+\nocite{raimbault2019generating}
+\nocite{raimbault2019space}
 
 
 
@@ -121,25 +139,36 @@ July 22th 2024
 
 \justify
 
-	$\rightarrow$ 
+	$\rightarrow$ Does the role of space in socio-spatial systems transfer to other disciplines?
           
          \bigskip      
                 
-	$\rightarrow$ 
+	$\rightarrow$ ALife as an interdisciplinary field to investigate spatial effects in various models.
 	
 	  \bigskip 
 	   \bigskip 
 
-\textbf{Contribution: }
+\textbf{Contribution: } considering Swarm Chemistry as an iconic model in ALife \cite{sayama2009swarm}, we investigate how different types of spatial structures for selection rules influence outcomes in the evolutionary swarm chemistry model \cite{sayama2018seeking}.
 
 
 }
 
 
 
-\sframe{Evolutionary swarm chemistry settings}{
+\sframe{Evolutionary swarm chemistry}{
 
 % We use the evolutionary version of Swarm Chemistry described by \citep{sayama2018seeking}. The base of the model are particles which self-organise based on local interaction rules (on speed and rotation e.g.) ruled by particle-level parameters. Some mutation in parameter values and transmission between particles at collision allows some evolutionary dynamics to be introduced. As no global fitness landscape rules this evolution, different rules can be used for this ``selection'' step at transmission: faster particle transmits its genome, slower transmits, the majority within a local neighbourhood is taken, etc. These rules can be changed in space and time to foster evolutionary dynamics as shown by \citep{sayama2018seeking}.
+
+% TODO "iconic" model: cf course Complex Systems Made Simple
+
+\begin{itemize}
+	\item ``Static'' swarm chemistry model \cite{sayama2009swarm}: self-propelled particles with kinetic parameters ($c_1$ cohesion, $c_2$ alignement, $c_3$ separation), self-organise into spatial patterns
+	\item Evolutionary dynamics on long times \cite{sayama2018seeking} induced by mutation in particle parameters and transmission occurring at particle collision
+	\item Different rules for parameters transmission: faster transmits, slower, local majority, behind, \ldots
+	\item Rules can be changed in space and time to foster evolutionary dynamics: in \cite{sayama2018seeking}, particles in half of the space switch their rule (faster/slower) during a time window
+\end{itemize}
+
+
 
 }
 
@@ -149,18 +178,37 @@ July 22th 2024
 
 % We introduce a spatial context in which swarm dynamics and evolution will take place. Given a grid decomposition of the two dimensional space (in practice with a lower resolution than coordinates), each cell of the grid will contain the transmission rule for collisions occurring in this cell. We consider the rules ``Faster'', ``Slower'', ``Behind'', ``Majority'' and ``Majority Relative'' only (see \citep{sayama2018seeking} for details), and organise the spatial distribution of rules with some structure. We use the following spatial contexts: (i) a totally random attribution of cell rule, to act as a null model (``random''); (ii) a uniform rule chosen randomly among all rules - which should also be a null model in some sense (``uniform''); (iii) four rectangular quadrants, with the space being split at a random x coordinate and at a random y coordinate, and with a uniform random rule within each quadrant - this configuration corresponds to neighbour regions with different evolution dynamics and exchanging particles, in a similar way to biogeography algorithms (``split''); (iv) a more realistic hierarchical organisation, inspired by the spatial organisation of systems of cities \citep{batty2008size}: a certain number of ``urban centres'' ($C=10$ in practice) with a scaling law distribution of sizes (Zipf's law, with a scaling exponent $\alpha_C = 1$ \citep{pumain2006evolutionary}) are randomly distributed in space, an exponential kernel with a radius proportional to the size is applied for each centre (monocentric cities \citep{lemoy2020evidence}), the distribution is rescaled as a probability distribution, a threshold ($\theta_C = 0.5$ in practice) is applied to discriminate between inside and outside of centres, and finally a randomly chosen rule is applied inside and an other random rule outside (``zipf''). Although inspired by urban science and patterns in social systems, we believe this last generator could also capture existing natural structures with similar hierarchical distributions, and have some genericity since hierarchy is recurrent in natural and social complex systems \citep{pumain2006hierarchy}.
 
+\footnotesize
 
-%figures/space-random-seed3862926447439152786.png%figures/space-split-seed916472849520508769.png%figures/space-uniform-seed-3159126300547140394.png%figures/space-zipf-seed7475060086555642944.png
+$\rightarrow$ introducing an heterogeneous spatial context for evolutionary rules (random among ``Faster'', ``Slower'', ``Behind'', ``Majority'' and ``Majority Relative''), randomly generated: (i) uniform (baseline), (ii) random, (iii) four quadrant split, (iv) polycentric with Zipf's law inspired by urban systems \cite{pumain2006evolutionary}  \cite{lemoy2020evidence}
+
+
+\begin{center}
+	\includegraphics[width=0.25\linewidth]{figures/space-uniform-seed-3159126300547140394.png}\hspace{0.5cm}
+	\includegraphics[width=0.25\linewidth]{figures/space-random-seed3862926447439152786.png}\\\vspace{0.5cm}
+		\includegraphics[width=0.25\linewidth]{figures/space-split-seed916472849520508769.png}\hspace{0.5cm}	\includegraphics[width=0.25\linewidth]{figures/space-zipf-seed7475060086555642944.png}
+\end{center}
 
 }
 
 
 
-\sframe{Diversity search}{
+\sframe{Indicators and experimental setup}{
+
+% We focus on the diversity of particles as an outcome of coupling the spatial generators with swarm dynamics, as it is a key aspect for evolution and open-ended systems. We consider average and standard deviation of three particle parameters, namely $c_1, c_2, c_3$ which capture the main essence of each particle behaviour. This gives a 6-dimensional output, for which we seek to maximise diversity using the Pattern Search Exploration algorithm developed by \citep{cherel2015beyond}.
+
+\textbf{Indicators : } summary statistics on main kinetic parameters on the swarm $\bar{c_1}, \bar{c_2}, \bar{c_3}, \sigma (c_1), \sigma (c_2), \sigma (c_3)$
 
 
-\textit{Application of the \textbf{PSE diversity search algorithm} \cite{cherel2015beyond} to obtain the feasible space.}
+%Swarm parameters are fixed at their default values used in \citep{sayama2018seeking}, except for swarm size taken smaller for performance reasons ($N=200$), and final time $t_f = 10000$. The swarm is initialised with 20 random individuals and 180 inactive particles. The free parameters for the diversity search algorithm, run for 2100 generations, are the seed of the random number generator, and the type of spatial generator used among the four described above.
 
+\bigskip
+
+Swarm parameters at default values \cite{sayama2018seeking}; swarm size $N=200$ and final time $t_f = 10000$; initialised with 20 random and 180 inactive particles.
+
+\bigskip
+
+Application of the \textbf{PSE diversity search algorithm} \cite{cherel2015beyond} to obtain a feasible space maximising diversity for indicators, with free parameters random seed and type of spatial generator.
 
 }
 
@@ -169,11 +217,15 @@ July 22th 2024
 
 % We use the implementation of spatial structure generators provided by \citep{raimbault2020scala}. For an easier integration with this scala library, the Swarm Chemistry model was reimplemented in scala, based on the open source Java code provided by \citep{sayama2018seeking}. Our implementation is embedded into the OpenMOLE software for exploration and validation of simulation models \citep{reuillon2013openmole}, which includes the PSE diversity search algorithm. Source code and results are available on an open git repository at \url{https://github.com/JusteRaimbault/SwarmChemistrySpatialSensitivity}.
 
-Model implemented in scala: \url{https://github.com/JusteRaimbault/SwarmChemistrySpatialSensitivity}
+Model reimplemented in scala, based on the open source java implementation by \cite{sayama2018seeking}
 
 \bigskip
 
-Integrated into the OpenMOLE platform for \textbf{model exploration and validation}	\cite{reuillon2013openmole}
+Open git repository: \url{https://github.com/JusteRaimbault/SwarmChemistrySpatialSensitivity}
+
+\bigskip
+
+Coupled with the spatial structure generators from \cite{raimbault2020scala} and integrated into the OpenMOLE platform for \textbf{model exploration and validation}	\cite{reuillon2013openmole}
 
 \medskip
 
@@ -187,15 +239,7 @@ Integrated into the OpenMOLE platform for \textbf{model exploration and validati
 
 
 
-\sframe{Indicators and parametrisation}{
 
-% We focus on the diversity of particles as an outcome of coupling the spatial generators with swarm dynamics, as it is a key aspect for evolution and open-ended systems. We consider average and standard deviation of three particle parameters, namely $c_1, c_2, c_3$ which capture the main essence of each particle behaviour. This gives a 6-dimensional output, for which we seek to maximise diversity using the Pattern Search Exploration algorithm developed by \citep{cherel2015beyond}.
-
-%Swarm parameters are fixed at their default values used in \citep{sayama2018seeking}, except for swarm size taken smaller for performance reasons ($N=200$), and final time $t_f = 10000$. The swarm is initialised with 20 random individuals and 180 inactive particles. The free parameters for the diversity search algorithm, run for 2100 generations, are the seed of the random number generator, and the type of spatial generator used among the four described above.
-
-
-
-}
 
 \sframe{Results: feasible spaces}{
 
@@ -206,11 +250,35 @@ Integrated into the OpenMOLE platform for \textbf{model exploration and validati
 %Altogether, these results confirm a significant effect of the spatial context on evolution outcomes in this model.
 
 
+\begin{center}
+	\includegraphics[height=0.8\textheight]{../pse-scatterplot_colorGenerator.png}
+\end{center}
+
+\footnotesize
+
+\textit{Indicator cloud points obtained running the PSE algorithm for 2100 generations}
 
 }
 
 
 \sframe{Results: statistical analysis}{
+
+
+% [1] "c1std : zipf - uniform : pval = 0.0549820679692933"%[1] "c2avg : split - uniform : pval = 0.0574049022158838"%[1] "c2avg : random - zipf : pval = 0.0174220186249937"%[1] "c2avg : zipf - uniform : pval = 0.00527838848277832"
+
+$\rightarrow$ t-tests to compare statistical distributions of each generator on each indicator.
+
+\medskip
+
+Significant differences:
+
+\begin{itemize}
+	\item $\sigma (c_1)$ : zipf - uniform, $p = 0.055$	\item $\bar{c_2}$ : split - uniform,  $p = 0.057$	\item  $\bar{c_2}$ : random - zipf :  $p = 0.017$	\item  $\bar{c_2}$ : zipf - uniform :  $p = 0.005$
+\end{itemize}
+
+\bigskip
+
+$\rightarrow$ average alignement is the parameter which is the most influenced by the spatial structure of evolution; Zipf's law spatial context has the strongest effect.
 
 }
 
@@ -222,16 +290,23 @@ Integrated into the OpenMOLE platform for \textbf{model exploration and validati
 
 \justify
 
-\textbf{Main results: }
+\textbf{Main result: } proof-of-concept of spatial sensitivity in the swarm chemistry model, and more generally in ALife models.
 			
 \bigskip
 				
 \textbf{Next steps: }
 
+\begin{itemize}
+	\item more experiments to link type of spatial structure to swarm typology
+	\item better qualitative understanding of spatial evolutionary dynamics and of the emerging biogeography
+	\item other types of spatial generators
+\end{itemize}
+
+
 
 \bigskip
 
-\textbf{Conclusion: } 
+\textbf{Conclusion: } spatial sensitivity across disciplines; application to more realistic evolutionary processes?
 
 
 }
